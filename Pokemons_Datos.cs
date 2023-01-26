@@ -18,7 +18,7 @@ namespace DB_Conexion_1
 
             try
             {
-                conexion.ConnectionString = " server = .\\SQLEXPRESS ; database = POKEDEX_DB , integrated security = true";
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comnado.CommandType = System.Data.CommandType.Text;
                 comnado.CommandText = "Select Numero, Nombre, Descripcion From POKEMONS";
                 comnado.Connection =  conexion;
@@ -34,7 +34,7 @@ namespace DB_Conexion_1
                     aux.Descripcion = (string)lector["Descripcion"];
                     lista.Add(aux);
                 }
-
+                conexion.Close();
 
                 return lista;
             }
