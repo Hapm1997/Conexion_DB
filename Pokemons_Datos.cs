@@ -20,7 +20,7 @@ namespace DB_Conexion_1
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comnado.CommandType = System.Data.CommandType.Text;
-                comnado.CommandText = "Select Numero, Nombre, Descripcion From POKEMONS";
+                comnado.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad From POKEMONS P, ELEMENTOS E, ELEMENTOS D where E.Id = P.IdTipo AND D.Id = P.IdDebilidad";
                 comnado.Connection =  conexion;
 
                 conexion.Open();
@@ -32,6 +32,11 @@ namespace DB_Conexion_1
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
+                    aux.UrlImagen = (string)lector["UrlImagen"];
+                    aux.Tipo = new Elemento();
+                    aux.Tipo.Descripcion = (string)lector["Tipo"];
+                    aux.Debilidad = new Elemento();
+                    aux.Debilidad.Descripcion = (string)lector["Debilidad"];
                     lista.Add(aux);
                 }
                 conexion.Close();
